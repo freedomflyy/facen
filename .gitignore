@@ -1,0 +1,47 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.trae/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.venv/
+venv/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# Runtime data
+backend/database.db
+backend/*.db
+backend/uploads/**
+!backend/uploads/
+!backend/uploads/faces/
+!backend/uploads/.gitkeep
+!backend/uploads/faces/.gitkeep
+
+# Local environment
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# Private presentation / report materials
+*.pptx
+*.7z
+*.jpg
+基于人脸识别的课堂签到系统/
+实习报告/
+校内实习报告/
