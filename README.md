@@ -1,47 +1,47 @@
 # Facen
 
-基于人脸识别的课堂签到系统，包含学生签到、教师发起签到、管理员管理、活体检测与地理围栏等能力。
+A classroom attendance system based on face recognition, with student check-in, teacher session publishing, admin management, liveness detection, and geofence validation.
 
-这个仓库已按公开展示场景做过整理：
+This repository has been prepared for public showcase use:
 
-- 不提交本地数据库、上传的人脸照片、IDE 配置、`node_modules`、实习报告/PPT 等非源码材料
-- JWT 密钥和数据库路径支持通过环境变量覆盖
-- 初始化演示数据改为通用示例账号，避免带出具体个人或校内信息
+- local database files, uploaded face photos, IDE settings, `node_modules`, and report materials are ignored
+- JWT secret and database path are configurable through environment variables
+- demo seed data has been replaced with neutral sample accounts
 
-## 功能概览
+## Features
 
-- 学生端：注册、拍照录入、签到码校验、活体检测、人脸比对、签到历史
-- 教师端：创建签到、按班级发布、查看到课情况、手动补签
-- 管理端：教师/学生/班级管理、教师班级分配、签到记录查看与修正
-- 校验能力：地理围栏、签到时效控制、人脸特征比对
+- Student flow: sign up, capture photo, verify session code, liveness detection, face matching, attendance history
+- Teacher flow: create attendance sessions, target classes, review attendance, manual check-in
+- Admin flow: manage teachers, students, classes, class assignment, and attendance records
+- Validation: session timeout, geofence checks, face embedding comparison
 
-## 技术栈
+## Tech Stack
 
-- 前端：Vue 3、Vite、Element Plus、Axios、face-api.js
-- 后端：FastAPI、SQLModel、SQLite、JWT
-- 视觉能力：InsightFace、OpenCV、ONNX Runtime、MiniFASNet
+- Frontend: Vue 3, Vite, Element Plus, Axios, face-api.js
+- Backend: FastAPI, SQLModel, SQLite, JWT
+- Vision: InsightFace, OpenCV, ONNX Runtime, MiniFASNet
 
-## 项目结构
+## Project Structure
 
 ```text
 .
-├─ backend/                 # FastAPI 后端
-│  ├─ main.py               # 主要接口
-│  ├─ models.py             # 数据模型
-│  ├─ auth.py               # JWT 与密码处理
-│  ├─ database.py           # 数据库连接
-│  ├─ init_data.py          # 演示数据初始化脚本
-│  └─ resources/            # 人脸 / 活体模型文件
-├─ frontend/                # Vue 前端
-│  ├─ src/views/            # 学生/教师/管理员页面
-│  ├─ src/components/       # 活体检测组件等
-│  └─ public/models/        # 前端人脸检测模型
-└─ README.md
+- backend/
+  - main.py
+  - models.py
+  - auth.py
+  - database.py
+  - init_data.py
+  - resources/
+- frontend/
+  - src/views/
+  - src/components/
+  - public/models/
+- README.md
 ```
 
-## 快速开始
+## Quick Start
 
-### 1. 启动后端
+### Backend
 
 ```bash
 cd backend
@@ -53,7 +53,7 @@ python init_data.py
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-### 2. 启动前端
+### Frontend
 
 ```bash
 cd frontend
@@ -61,22 +61,22 @@ npm install
 npm run dev
 ```
 
-默认前端开发服务会把 `/api` 代理到 `http://127.0.0.1:8000`。
+The Vite dev server proxies `/api` to `http://127.0.0.1:8000`.
 
-## 演示账号
+## Demo Accounts
 
-初始化脚本会生成以下演示账号：
+The seed script creates these local demo accounts:
 
-- 管理员：`root / root`
-- 教师：`teacher_a / 123456`
-- 教师：`teacher_b / 123456`
-- 学生：`student_01 ~ student_04 / 123456`
+- `root / root`
+- `teacher_a / 123456`
+- `teacher_b / 123456`
+- `student_01` to `student_04` / `123456`
 
-这些账号仅用于本地演示，公开部署前应全部更换。
+These are for local demo use only and should be replaced before any real deployment.
 
-## 环境变量
+## Environment Variables
 
-`backend/.env.example`
+See `backend/.env.example`:
 
 ```env
 FACEN_SECRET_KEY=replace-with-a-random-secret
@@ -85,13 +85,19 @@ FACEN_ACCESS_TOKEN_EXPIRE_MINUTES=30
 FACEN_DB_PATH=database.db
 ```
 
-## 发布到 GitHub 的建议
+## Notes For GitHub Showcase
 
-- 首次提交前执行 `git status`，确认没有把 `backend/database.db`、`backend/uploads/`、`.idea/`、`frontend/node_modules/` 等文件带上
-- 如果你已经在别处初始化过 Git 历史，先确认历史里没有提交过真实人脸照片或数据库
-- 如果后续想做展示图，建议重新截取不含真实姓名、学号、人脸原图的页面截图再上传
+- Do not commit real face images, local databases, or screenshots with real names or student IDs
+- The repository currently keeps model files for easier local reproduction
+- Some legacy comments in backend code still contain historical encoding issues, but runtime behavior is unaffected
 
-## 已知说明
+## Suggested Repository Description
 
-- 仓库中保留了模型文件，方便本地复现；如果你想进一步减小仓库体积，可以改为从发行包或网盘单独提供
-- 当前后端代码里有少量历史中文注释乱码，不影响运行，但如果要进一步整理展示，可以后续统一修复
+Face recognition classroom attendance system built with Vue 3 and FastAPI, featuring liveness detection and geofence-based check-in.
+
+## Suggested Screenshot Plan
+
+- Login page with generic demo accounts only
+- Teacher dashboard showing a sample attendance session
+- Student check-in flow with blurred or synthetic face data
+- Admin dashboard with anonymized class and user records
